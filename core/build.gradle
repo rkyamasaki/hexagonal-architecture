@@ -2,6 +2,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testImplementation 'org.mockito:mockito-junit-jupiter:2.23.0'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version"
 }
 
 test {

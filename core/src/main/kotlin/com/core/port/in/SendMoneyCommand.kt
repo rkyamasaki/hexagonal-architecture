@@ -4,6 +4,6 @@ import com.core.domain.Money
 
 data class SendMoneyCommand(
         val sourceAccountId: Long,
-        val targeAccountId: Long,
+        val targetAccountId: Long,
         val money: Money
 )

@@ -4,6 +4,6 @@ import com.core.domain.Account
 
 interface UpdateAccountOutputPort{
     
-    fun updateAccount(account: Account)
+    fun updateAccount(account: Account): Boolean
     
 }

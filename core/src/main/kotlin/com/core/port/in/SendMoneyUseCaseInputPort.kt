@@ -11,7 +11,7 @@ class SendMoneyUseCaseInputPort(
     
     fun sendMoney(sendMoneyCommand: SendMoneyCommand): Boolean {
         val sourceAccount = loadAccountOutputPort.loadAccount(sendMoneyCommand.sourceAccountId)
-        val targetAccount = loadAccountOutputPort.loadAccount(sendMoneyCommand.targeAccountId)
+        val targetAccount = loadAccountOutputPort.loadAccount(sendMoneyCommand.targetAccountId)
         val moneyToTransfer = sendMoneyCommand.money
 
         if (!sourceAccount.witdhdraw(money = moneyToTransfer)) {
@@ -19,6 +19,8 @@ class SendMoneyUseCaseInputPort(
         }
 
         targetAccount.deposit(money = moneyToTransfer)
+        updateAccountOutputPort.updateAccount(sourceAccount)
+        updateAccountOutputPort.updateAccount(sourceAccount)
         return true
     } 
     
