@@ -1,10 +1,12 @@
 package com.core.domain
 
+import java.math.BigInteger
+
 class Account(
         val id: Long,
         val ownerName: String,
         val ownerDocument: String,
-        var balance: Money
+        private var balance: Money
         
 ) {
     
@@ -19,5 +21,7 @@ class Account(
     fun deposit(money: Money) {
         balance = this.balance sum money
     }
+    
+    fun getAccountBalance(): BigInteger = balance.amount
     
 }
