@@ -2,3 +2,5 @@ rootProject.name = 'hexagonal.architecture'
 
 include 'adapters:output-persistence-h2'
 include 'core'
+include 'application'
+
