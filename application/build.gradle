@@ -1,5 +1,6 @@
 dependencies {
     compile project(':adapters:output-persistence-h2')
+    compile project(':adapters:input-rest')
     compile project(':core')
     
     implementation 'org.springframework.boot:spring-boot-starter-parent:2.4.3'

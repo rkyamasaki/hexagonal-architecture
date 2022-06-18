@@ -22,31 +22,10 @@ import java.util.*
 
 @SpringBootApplication
 @Configuration
-@ComponentScan(basePackages = arrayOf("hexagonal.output.persistence"))
+@ComponentScan(basePackages = arrayOf("hexagonal.output.persistence", "hexagonal.input.*"))
 @EnableJpaRepositories(basePackages = arrayOf("hexagonal.output.persistence"))
 @EntityScan(basePackages = arrayOf("hexagonal.output.persistence"))
-open class Application(
-        val accountRepository: AccountRepository
-)
-    : ApplicationRunner {
-
-    private var applicationContext: ApplicationContext? = null
-    
-    override fun run(args: ApplicationArguments?) {
-        val account: Account = Account(
-                id=1,
-                ownerDocument = "0616789",
-                ownerName = "Josimar teste",
-                balance = Money(BigInteger.valueOf(15))
-        )
-        print("------------------------------------------------")
-        accountRepository.save(AccountMapper.mapToEntity(account))
-        val accountEntity: Optional<AccountEntity> = accountRepository.findById(1L)
-        print(accountEntity.get())
-        print("---------------------------------------------------")
-    }
-
-}
+open class Application
 
 fun main(args: Array<String>) {
     runApplication<Application>(*args)
