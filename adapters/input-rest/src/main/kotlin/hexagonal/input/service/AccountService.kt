@@ -1,15 +1,20 @@
 package hexagonal.input.service
 
+import hexagonal.core.domain.Money
 import hexagonal.core.port.`in`.NewAccountCommand
 import hexagonal.core.port.`in`.NewAccountUseCaseInputPort
+import hexagonal.core.port.`in`.SendMoneyCommand
+import hexagonal.core.port.`in`.SendMoneyUseCaseInputPort
 import hexagonal.input.data.AccountResponse
 import hexagonal.input.data.CreateAccountRequest
+import hexagonal.input.data.SendMoneyRequest
 import hexagonal.output.persistence.AccountPersistenceAdapter
 import org.springframework.stereotype.Service
+import java.math.BigInteger
 
 @Service
 class AccountService(
-        val accountPersistenceAdapter: AccountPersistenceAdapter
+        val accountPersistenceAdapter: AccountPersistenceAdapter,
 ) {
     
     fun createAccount(createAccountRequest: CreateAccountRequest) {
@@ -33,6 +38,18 @@ class AccountService(
                 ownerDocument = account.ownerDocument,
                 balance = account.getAccountBalance().toLong()
         )
+    }
+    
+    fun sendMoney(sendMoneyRequest: SendMoneyRequest) {
+        val money = Money(BigInteger.valueOf(sendMoneyRequest.value))
+        val sendMoneyCommand = SendMoneyCommand(
+                sourceAccountId = sendMoneyRequest.sourceAccountId,
+                targetAccountId = sendMoneyRequest.targetAccountId,
+                money = money
+        )
+        
+        val sendMoneyUseCaseInputPort = SendMoneyUseCaseInputPort(accountPersistenceAdapter, accountPersistenceAdapter)
+        sendMoneyUseCaseInputPort.sendMoney(sendMoneyCommand)
     }
     
 }

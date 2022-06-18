@@ -20,7 +20,7 @@ class SendMoneyUseCaseInputPort(
 
         targetAccount.deposit(money = moneyToTransfer)
         updateAccountOutputPort.updateAccount(sourceAccount)
-        updateAccountOutputPort.updateAccount(sourceAccount)
+        updateAccountOutputPort.updateAccount(targetAccount)
         return true
     } 
     

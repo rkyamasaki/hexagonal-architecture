@@ -2,6 +2,7 @@ package hexagonal.input.rest
 
 import hexagonal.input.data.AccountResponse
 import hexagonal.input.data.CreateAccountRequest
+import hexagonal.input.data.SendMoneyRequest
 import hexagonal.input.service.AccountService
 import org.springframework.web.bind.annotation.*
 
@@ -19,6 +20,11 @@ class AccountController(
     @GetMapping("{id}")
     fun getAccount(@PathVariable id: Long): AccountResponse {
         return accountService.findAccount(id)
+    }
+    
+    @PostMapping("/balance")
+    fun sendMoney(@RequestBody sendMoneyRequest: SendMoneyRequest) {
+        accountService.sendMoney(sendMoneyRequest)
     }
     
 }
