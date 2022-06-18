@@ -1,10 +1,10 @@
 package hexagonal.application
 
-import com.core.domain.Account
-import com.core.domain.Money
-import io.adapter.persistence.AccountEntity
-import io.adapter.persistence.AccountMapper
-import io.adapter.persistence.AccountRepository
+import hexagonal.core.domain.Account
+import hexagonal.core.domain.Money
+import hexagonal.output.persistence.AccountEntity
+import hexagonal.output.persistence.AccountMapper
+import hexagonal.output.persistence.AccountRepository
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -22,9 +22,9 @@ import java.util.*
 
 @SpringBootApplication
 @Configuration
-@ComponentScan(basePackages = arrayOf("io.adapter.persistence"))
-@EnableJpaRepositories(basePackages = arrayOf("io.adapter.persistence"))
-@EntityScan(basePackages = arrayOf("io.adapter.persistence"))
+@ComponentScan(basePackages = arrayOf("hexagonal.output.persistence"))
+@EnableJpaRepositories(basePackages = arrayOf("hexagonal.output.persistence"))
+@EntityScan(basePackages = arrayOf("hexagonal.output.persistence"))
 open class Application(
         val accountRepository: AccountRepository
 )
