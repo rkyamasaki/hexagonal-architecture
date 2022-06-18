@@ -7,20 +7,9 @@ import hexagonal.core.port.out.UpdateAccountOutputPort
 import org.springframework.stereotype.Component
 
 @Component
-class AccountPersistenceAdapter(
+class UpdateAccountPersistenceAdapter(
         val accountRepository: AccountRepository
-) : CreateAccountOutputPort, LoadAccountOutputPort, UpdateAccountOutputPort {
-    
-    
-    override fun createAccount(account: Account): Boolean {
-        val accountEntity: AccountEntity = AccountMapper.mapToEntity(account)
-        accountRepository.save(accountEntity)
-        return true
-    }
-
-    override fun loadAccount(accountId: Long): Account {
-        return AccountMapper.mapToDomainObject(accountRepository.findById(accountId).get())
-    }
+) : UpdateAccountOutputPort {
 
     override fun updateAccount(account: Account): Boolean {
         accountRepository.save(AccountMapper.mapToEntity(account))

@@ -8,13 +8,17 @@ import hexagonal.core.port.`in`.SendMoneyUseCaseInputPort
 import hexagonal.input.data.AccountResponse
 import hexagonal.input.data.CreateAccountRequest
 import hexagonal.input.data.SendMoneyRequest
-import hexagonal.output.persistence.AccountPersistenceAdapter
+import hexagonal.output.persistence.CreateAccountPersistenceAdapter
+import hexagonal.output.persistence.LoadAccountPersistenceAdapter
+import hexagonal.output.persistence.UpdateAccountPersistenceAdapter
 import org.springframework.stereotype.Service
 import java.math.BigInteger
 
 @Service
 class AccountService(
-        val accountPersistenceAdapter: AccountPersistenceAdapter,
+        val createAccountPersistenceAdapter: CreateAccountPersistenceAdapter,
+        val loadAccountPersistenceAdapter: LoadAccountPersistenceAdapter,
+        val updateAccountPersistenceAdapter: UpdateAccountPersistenceAdapter
 ) {
     
     fun createAccount(createAccountRequest: CreateAccountRequest) {
@@ -25,12 +29,12 @@ class AccountService(
                 balance = createAccountRequest.balance
         )
         
-        val newAccountUseCaseInputPort: NewAccountUseCaseInputPort = NewAccountUseCaseInputPort(accountPersistenceAdapter)
+        val newAccountUseCaseInputPort: NewAccountUseCaseInputPort = NewAccountUseCaseInputPort(createAccountPersistenceAdapter)
         newAccountUseCaseInputPort.createNewAccount(newAccountCommand)
     }
     
     fun findAccount(accountId: Long): AccountResponse {
-        val account = accountPersistenceAdapter.loadAccount(accountId)
+        val account = loadAccountPersistenceAdapter.loadAccount(accountId)
         
         return AccountResponse(
                 id = account.id,
@@ -48,7 +52,7 @@ class AccountService(
                 money = money
         )
         
-        val sendMoneyUseCaseInputPort = SendMoneyUseCaseInputPort(accountPersistenceAdapter, accountPersistenceAdapter)
+        val sendMoneyUseCaseInputPort = SendMoneyUseCaseInputPort(updateAccountPersistenceAdapter, loadAccountPersistenceAdapter)
         sendMoneyUseCaseInputPort.sendMoney(sendMoneyCommand)
     }
     
