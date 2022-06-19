@@ -12,7 +12,7 @@ class UpdateAccountPersistenceAdapter(
 ) : UpdateAccountOutputPort {
 
     override fun updateAccount(account: Account): Boolean {
-        accountRepository.save(AccountMapper.mapToEntity(account))
+        accountRepository.update(AccountMapper.mapToEntity(account))
         return true
     }
 }
