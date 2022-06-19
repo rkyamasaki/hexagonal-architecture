@@ -2,12 +2,17 @@ buildscript {
 	ext.kotlin_version = '1.4.10'
 	ext.mockito_kotlin_version='4.0.0'
 	repositories {
+		maven {
+			url = uri("https://repo.intranet.pags/artifactory/gradle-all/")
+		}
 		mavenCentral()
 	}
 	dependencies {
 		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.4.3"
 	}
 }
+
 plugins {
 	id 'org.springframework.boot' version '2.4.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -25,6 +30,9 @@ subprojects {
 	apply plugin: 'java-library'
 
 	repositories {
+		maven {
+			url = uri("https://repo.intranet.pags/artifactory/gradle-all/")
+		}
 		mavenCentral()
 	}
 	
