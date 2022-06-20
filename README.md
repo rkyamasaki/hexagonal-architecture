@@ -10,7 +10,7 @@ Devemos pensar em desenvolver sistemas de modo que seu crescimento seja sustent�
 A complexidade inicial acaba se pagando ao longo do projeto.
 
 #### Conceito inicial
-Foi propost por Alistair Cockburn em meados dos anos 90. 
+Foi propost por Alistair Cockburn. 
 Seu principal objetivo é isolar as classes de domínio, tornando ela independente de infraestrutura, tecnologia ou sistemas internos.
 
 Ela também é conhecida como "Ports and Adapters". 
