@@ -12,7 +12,7 @@ class LoadAccountPersistenceAdapter(
 ) : LoadAccountOutputPort {
   
     override fun loadAccount(accountId: Long): Account {
-        return AccountMapper.mapToDomainObject(accountRepository.findById(accountId).get())
+        return AccountMapper.mapToDomainObject(accountRepository.findById(accountId))
     }
 
 }
